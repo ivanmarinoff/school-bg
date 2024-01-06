@@ -1,0 +1,66 @@
+{% extends 'content/content_navbar.html' %}
+{% load static %}
+{% block navbar_content %}
+    <div class="container" id="content">
+        <div class="row">
+            <div class="text-center" data-wow-delay="0.9s">
+                <br><br><br><br>
+                <form action="{% url 'detail-content' slug=object.slug %}" enctype="multipart/form-data"
+                      method="get"></form>
+                <tbody>
+                <tr>
+                    <td>
+                        <h2>
+                            {{ object.title }}
+                        </h2>
+                    </td>
+                    <td>
+                        <p1>
+                            {{ object.text }}
+                        </p1>
+                    </td>
+                    {% if object.image_url %}
+                        <td>
+                            <p>
+                            <div class="fa-image">
+                                <img src="{{ object.image_url }}" style="width:50%" alt="Image_url"></div>
+                            </p>
+                        </td>
+                    {% endif %}
+                    <td>
+                        {% if object.file %}
+                            <td>
+                                <a href="{{ object.file.url }}" target="_blank" rel="noopener noreferrer"
+                                   type="file">
+                                    <button>Read file</button>
+                                </a>
+                            </td>
+                        {% endif %}
+                    <td>
+                        {% if object.video %}
+                            <a href="{{ object.video.url }}" target="_blank" rel="noopener noreferrer"
+                               type="video">
+                                <button>View Video</button>
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% if request.user.is_superuser %}
+                    <form action="{% url 'edit-content' slug=object.slug %}" method="post"
+                          enctype="multipart/form-data"></form>
+                    <a href="{% url 'edit-content' slug=object.slug %}" class="smoothScroll">
+                        <button>Edit</button>
+                    </a>
+                    <form action="{% url 'delete-content' slug=object.slug %}" method="post"
+                          enctype="multipart/form-data"></form>
+                    <a href="{% url 'delete-content' slug=object.slug %}" class="smoothScroll">
+                        <button>Delete</button>
+                    </a>
+                {% endif %}
+
+                <button onclick="history.back()">Go Back</button>
+
+            </div>
+        </div>
+    </div>
+{% endblock navbar_content %}

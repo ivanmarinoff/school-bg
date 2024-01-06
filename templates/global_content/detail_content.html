@@ -1,0 +1,73 @@
+{% extends 'global_content/global_navbar.html' %}
+{% load static %}
+{% block global_navbar_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br><br><br><br>
+                <div class="text-center" data-wow-delay="0.2s">
+                    <div class="about-thumb">
+                        <form action="{% url 'global-detail-content' slug=object.slug %}" enctype="multipart/form-data"
+                              method="get"></form>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h2>
+                                    {{ object.title }}
+                                </h2>
+                            </td>
+                            <td>
+                                <p1>
+                                    {{ object.text }}
+                                </p1>
+
+                            </td>
+                            {% if object.image_url %}
+                                <td>
+                                    <p>
+                                    <div class="fa-image">
+                                        <img src="{{ object.image_url }}" style="width:51%" alt="Image_url"></div>
+                                    </p>
+                                </td>
+                            {% endif %}
+                            <td>
+                                {% if object.file %}
+                                    <td>
+                                        <a href="{{ object.file.url }}" target="_blank" rel="noopener noreferrer"
+                                           type="file">
+                                            <button>Read file</button>
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            <td>
+                                {% if object.video %}
+                                    <a href="{{ object.video.url }}" target="_blank" rel="noopener noreferrer"
+                                       type="video">
+                                        <button>View Video</button>
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% if request.user.is_superuser %}
+                            <form action="{% url 'global-edit-content' slug=object.slug %}" method="post"
+                                  enctype="multipart/form-data"></form>
+                            <form action="{% url 'global-delete-content' slug=object.slug %}" method="post"
+                                  enctype="multipart/form-data"></form>
+
+                            <a href="{% url 'global-edit-content' slug=object.slug %}" class="smoothScroll">
+                                <button>Edit</button>
+                            </a>
+                            <a href="{% url 'global-delete-content' slug=object.slug %}" class="smoothScroll">
+                                <button>Delete</button>
+                            </a>
+
+                        {% endif %}
+                        <button onclick="history.back()">Go Back</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock global_navbar_content %}

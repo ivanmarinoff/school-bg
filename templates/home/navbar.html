@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <title>S.O.V.A</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'pictures/logo/favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/component.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vegas.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+
+    <!-- Navigation section  -->
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+                <a href="{% url 'home_page' %}" class="navbar-brand smoothScroll">SCHOOL OF PSYCHOLOGY</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'read-content' %}"
+                               class="smoothScroll"><span>Level 1</span></a></li>
+                        <li><a href="{% url 'global-read-content' %}"
+                               class="smoothScroll"><span>Level 2</span></a></li>
+                        <li><a href="{% url 'profile-details' pk=request.user.pk %}" class="smoothScroll"><span>Profile Details</span></a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{% url 'logout_user' %}">
+                                {% csrf_token %}
+                                <a href="#" class="smoothScroll" onclick="this.closest('form').submit(); return false;"><span>Logout: {{ request.user }}</span></a>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a href="#top" class="smoothScroll"><span>Home</span></a></li>
+                        <li><a href="#about" class="smoothScroll"><span>About</span></a></li>
+                        <li><a href="#gallery" class="smoothScroll"><span>Introduction</span></a></li>
+                        <li><a href="#contact" class="smoothScroll"><span>Contact</span></a></li>
+                        <li><a href="{% url 'login_user' %}" class="smoothScroll"><span>Login</span></a></li>
+                        <li><a href="{% url 'register_user' %}" class="smoothScroll"><span>Sign Up</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+<!-- ChatBot section  -->
+    <script type="text/javascript">!function (t, e) {
+    t.artibotApi = {
+        l: [], t: [], on: function () {
+            this.l.push(arguments)
+        }, trigger: function () {
+            this.t.push(arguments)
+        }
+    };
+    var a = !1, i = e.createElement("script");
+    i.async = !0, i.type = "text/javascript", i.src = "https://app.artibot.ai/loader.js", e.getElementsByTagName("head").item(0).appendChild(i), i.onreadystatechange = i.onload = function () {
+        if (!(a || this.readyState && "loaded" != this.readyState && "complete" != this.readyState)) {
+            new window.ArtiBot({i: "58464b32-2cc8-4814-afeb-a07c22f20301"});
+            a = !0
+        }
+    }
+}(window, document);</script>
+    <!-- Javascript  -->
+{#    <script src="{% static 'js/jquery.js' %}"></script>#}
+{#    <script src="{% static 'js/bootstrap.min.js' %}"></script>#}
+{#    <script src="{% static 'js/vegas.min.js' %}"></script>#}
+{#    <script src="{% static 'js/modernizr.custom.js' %}"></script>#}
+{#    <script src="{% static 'js/toucheffects.js' %}"></script>#}
+{#    <script src="{% static 'js/owl.carousel.min.js' %}"></script>#}
+{#    <script src="{% static 'js/smoothscroll.js' %}"></script>#}
+{#    <script src="{% static 'js/wow.min.js' %}"></script>#}
+{#    <script src="{% static 'js/custom.js' %}"></script>#}
+    {% block content %}
+    {% endblock %}
+</head>
+</html>
