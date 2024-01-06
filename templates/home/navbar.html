@@ -33,7 +33,7 @@
                     <span class="icon icon-bar"></span>
                     <span class="icon icon-bar"></span>
                 </button>
-                <a href="{% url 'home_page' %}" class="navbar-brand smoothScroll">SCHOOL OF PSYCHOLOGY</a>
+                <a href="{% url 'home_page' %}" class="navbar-brand smoothScroll">УЧИЛИЩЕ ЗА ПСИХОЛОГИЯ</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -42,7 +42,7 @@
                                class="smoothScroll"><span>Level 1</span></a></li>
                         <li><a href="{% url 'global-read-content' %}"
                                class="smoothScroll"><span>Level 2</span></a></li>
-                        <li><a href="{% url 'profile-details' pk=request.user.pk %}" class="smoothScroll"><span>Profile Details</span></a>
+                        <li><a href="{% url 'profile-details' pk=request.user.pk %}" class="smoothScroll"><span>Профил</span></a>
                         </li>
                         <li>
                             <form method="POST" action="{% url 'logout_user' %}">
@@ -51,10 +51,10 @@
                             </form>
                         </li>
                     {% else %}
-                        <li><a href="#top" class="smoothScroll"><span>Home</span></a></li>
-                        <li><a href="#about" class="smoothScroll"><span>About</span></a></li>
-                        <li><a href="#gallery" class="smoothScroll"><span>Introduction</span></a></li>
-                        <li><a href="#contact" class="smoothScroll"><span>Contact</span></a></li>
+                        <li><a href="#top" class="smoothScroll"><span>Начало</span></a></li>
+                        <li><a href="#about" class="smoothScroll"><span>За нас</span></a></li>
+                        <li><a href="#gallery" class="smoothScroll"><span>Програма</span></a></li>
+                        <li><a href="#contact" class="smoothScroll"><span>Контакти</span></a></li>
                         <li><a href="{% url 'login_user' %}" class="smoothScroll"><span>Login</span></a></li>
                         <li><a href="{% url 'register_user' %}" class="smoothScroll"><span>Sign Up</span></a></li>
                     {% endif %}
