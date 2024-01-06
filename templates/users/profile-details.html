@@ -22,7 +22,7 @@
     {% csrf_token %}
     </form>
     <form action="{% url 'profile-edit' request.user.pk %}" method="get" class="wow fadeInUp">
-            <input type="submit" class="form-control" value="Edit Profile">
+            <input type="submit" class="form-control" value="Редактирай профил">
     {% csrf_token %}
         </form>
 {% endblock user_content %}
