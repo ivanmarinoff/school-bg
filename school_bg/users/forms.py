@@ -60,6 +60,9 @@ class UserPasswordChangeForm(auth_forms.PasswordChangeForm):
     def check_password(self):
         return self.cleaned_data['old_password'] == self.cleaned_data['new_password2']
 
+    def save(self, commit=True):
+        result = super().save(commit)
+        return result
 
 
 @register.filter

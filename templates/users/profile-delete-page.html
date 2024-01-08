@@ -6,7 +6,7 @@
 
 
     <body>
-    <div class="container" id="content">
+{#    <div class="container" id="content">#}
         <div class="row">
             <div class="col-12 row text align-fa-align-center">
 
@@ -37,7 +37,7 @@
                     </tr>
                     </tbody>
                     {% csrf_token %}
-                    <h2>Are you sure you want to delete this profile??</h2>
+                    <h2>Сигурни ли сте, че искате да изтриете Вашия профил?</h2>
                     <button type="submit">Yes</button>
 
                     <button type="button" value="Back" onClick="history.back()">Back</button>
@@ -47,7 +47,7 @@
 
                 </form>
             </div>
-        </div>
+{#        </div>#}
     </div>
     </body>
     {% csrf_token %}
