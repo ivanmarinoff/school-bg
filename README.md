@@ -1,4 +1,4 @@
-[![Schedule for GET requests](https://github.com/ivanmarinoff/deploy-school/actions/workflows/webappalive.yml/badge.svg)](https://github.com/ivanmarinoff/deploy-school/actions/workflows/webappalive.yml)
+[![Schedule for GET requests](https://github.com/ivanmarinoff/school-bg/actions/workflows/web_alive.yml/badge.svg)](https://github.com/ivanmarinoff/school-bg/actions/workflows/web_alive.yml)
 
 # [ S.O.V.A-school](https://github.com/SOVASchool)
 
