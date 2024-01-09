@@ -1,4 +1,4 @@
-[![Schedule for GET requests](https://github.com/ivanmarinoff/school-bg/actions/workflows/web_alive.yml/badge.svg)](https://github.com/ivanmarinoff/school-bg/actions/workflows/web_alive.yml)
+[![Schedule for GET requests](https://github.com/ivanmarinoff/school-bg/actions/workflows/web_alive.yml/badge.svg)](https://github.com/ivanmarinoff/school-bg/actions/workflows/web_alive.yml) [![Django CI](https://github.com/ivanmarinoff/school-bg/actions/workflows/django.yml/badge.svg)](https://github.com/ivanmarinoff/school-bg/actions/workflows/django.yml)
 
 # [ S.O.V.A-school](https://github.com/SOVASchool)
 
