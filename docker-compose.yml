@@ -9,7 +9,7 @@ services:
   web:
     image: ivanmarinoff/sova_bg
     build: .
-    command: gunicorn --bind 0.0.0.0:8000 sova_school.wsgi:application
+    command: gunicorn --bind 0.0.0.0:8000 school_bg.wsgi:application
     ports:
       - "8000:8000"
     env_file:

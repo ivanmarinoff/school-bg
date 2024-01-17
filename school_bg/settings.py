@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-import dj_database_url
-from django.conf.global_settings import DATABASES
+# import dj_database_url
+# from django.conf.global_settings import DATABASES
 from django.utils.log import RequireDebugTrue, RequireDebugFalse
 from django.conf import DEFAULT_STORAGE_ALIAS
 from django.template.context_processors import media
@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 # with open("$.env", 'a+') as newenv:
 #     newenv.write("\n$varname=$varvalue")
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "whitenoise.runserver_nostatic",
+    # "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
 
     "corsheaders",
@@ -165,9 +166,9 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+STATIC_ROOT = os.environ.get('STATIC_ROOT', BASE_DIR / 'static_files')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -189,7 +190,7 @@ SECURE_HSTS_PRELOAD = True  # Optional: Enable HSTS preload
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Optional: Include subdomains
 # SECURE_SSL_REDIRECT = True
 # SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
 LOGGING = {
     'version': 1,
