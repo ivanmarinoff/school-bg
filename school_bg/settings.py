@@ -162,13 +162,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-]
-STATIC_ROOT = os.environ.get('STATIC_ROOT', BASE_DIR / 'static_files')
+    ]
+STATIC_ROOT = os.path.join('STATIC_ROOT', BASE_DIR / 'static_files')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STORAGES = {
+    "staticfiles": {'BACKEND': "django.contrib.staticfiles.storage.StaticFilesStorage"}
+}
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
