@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/content/', include('school_bg.content.urls')),
     path('api/global_content/', include('school_bg.global_content.urls')),
     path('api/users/', include('school_bg.users.urls')),
+    path('schema/', include('schema_viewer.urls')),
 ]
 
 if not settings.DEBUG:

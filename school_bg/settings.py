@@ -32,7 +32,19 @@ INSTALLED_APPS = [
     "school_bg.content",
     "school_bg.users.apps.UsersConfig",
     "school_bg.global_content",
+    'schema_viewer',
 ]
+
+SCHEMA_VIEWER = {
+    'apps': [
+"django.contrib.auth",
+        "school_bg.content",
+        "school_bg.users",
+        "school_bg.global_content",
+        "django.contrib.admin",
+        "django.contrib.contenttypes",
+    ],
+}
 
 CHANNEL_LAYERS = {
     'default': {
@@ -165,6 +177,15 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

@@ -54,6 +54,11 @@ This is a [ S.O.V.A](http://www.sovapsychologist.com")-school site project built
 
 <br />
 
+## DB Schema viewer
+![schema_viewer]
+
+<br />
+
 - **Sections Covered**: 
   - `Admin Section`, reserved for `superusers`
   - `All pages` managed by `Django.contrib.AUTH`
