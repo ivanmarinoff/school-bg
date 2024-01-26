@@ -55,7 +55,7 @@ This is a [ S.O.V.A](http://www.sovapsychologist.com")-school site project built
 <br />
 
 ## DB Schema viewer
-![schema_viewer]
+![schema_viewer](https://github.com/ivanmarinoff/school-bg/assets/107050101/c6c0043b-8a5f-4e35-899b-27f177b7c7e2)
 
 <br />
 
