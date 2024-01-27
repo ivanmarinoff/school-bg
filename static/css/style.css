@@ -20,7 +20,7 @@ http://www.templatemo.com/tm-493-snapshot
 ------------------------------------- */
 body {
     background: #ffffff;
-    font-family: 'DoubleShadow', DoubleShadow, Arial, sans-serif;
+    font-family: "Alegreya Sans", Alegreya Sans, Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -79,7 +79,8 @@ h3 {
 }
 
 p {
-    color: #888888;
+    /*color: #888888;*/
+    color: black;
     font-size: 20px;
     letter-spacing: 3px;
     line-height: 34px;
@@ -531,7 +532,8 @@ a:hover, a:active, a:focus {
 -----------------------------------------*/
 
 #contact, footer {
-    background: #304352;
+    /*background: #304352;*/
+    background: linear-gradient(180deg, #1E312A 0%, #BC9C22 100%);
     color: #ffffff;
 }
 

@@ -1351,7 +1351,8 @@ html {
 }
 
 body {
-    font-family: "DoubleShadow ", DoubleShadow, Arial, sans-serif;
+    /*font-family: "DoubleShadow ", DoubleShadow, Arial, sans-serif;*/
+    font-family: "Alegreya Sans", Alegreya Sans, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
