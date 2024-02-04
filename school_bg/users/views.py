@@ -79,7 +79,6 @@ class RegisterUserView(views.CreateView):
     model = UserModel
     template_name = 'home/signup.html'
     form_class = RegisterUserForm
-    success_url = reverse_lazy('login_user')
     class_name = 'signup'
 
     def form_valid(self, form):
@@ -107,7 +106,6 @@ class RegisterUserView(views.CreateView):
 class LoginUserView(auth_views.LoginView):
     form_class = LoginUserForm
     template_name = 'home/login.html'
-    success_url = reverse_lazy('profile-details')
     class_name = 'login'
     redirect_authenticated_user = True
 
