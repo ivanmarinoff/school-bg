@@ -176,19 +176,28 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+if not DEBUG:
+    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 # STORAGES = {
 #     "default": {
 #         "BACKEND": "django.core.files.storage.FileSystemStorage",
 #     },
-    # "staticfiles": {
-    #     "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    # },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+#     },
 # }
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
