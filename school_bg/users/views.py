@@ -107,7 +107,6 @@ class LoginUserView(auth_views.LoginView):
     form_class = LoginUserForm
     template_name = 'home/login.html'
     class_name = 'login'
-    redirect_authenticated_user = True
 
     def form_valid(self, form):
         result = form.cleaned_data.get('username')
