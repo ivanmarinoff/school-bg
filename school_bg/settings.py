@@ -111,12 +111,13 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 CSRF_TRUSTED_ORIGINS = [f'http://{x}:80' for x in os.environ.get('ALLOWED_HOSTS', '').split(' ')]
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         conn_max_age=600,
-#         conn_health_checks=True,
-#     ),
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://...',
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
 
 # DATABASES = {
 #     "default": {
@@ -124,17 +125,17 @@ CSRF_TRUSTED_ORIGINS = [f'http://{x}:80' for x in os.environ.get('ALLOWED_HOSTS'
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME', None),
-        'USER': os.environ.get('DATABASE_USER', None),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', None),
-        'HOST': os.environ.get('DATABASE_HOST', None),
-        'PORT': os.environ.get('DATABASE_PORT', None),
-    }
-}
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DATABASE_NAME', None),
+#         'USER': os.environ.get('DATABASE_USER', None),
+#         'PASSWORD': os.environ.get('DATABASE_PASSWORD', None),
+#         'HOST': os.environ.get('DATABASE_HOST', None),
+#         'PORT': os.environ.get('DATABASE_PORT', None),
+#     }
+# }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', None)
