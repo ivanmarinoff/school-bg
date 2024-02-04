@@ -35,44 +35,44 @@ if cached_data is None:
     cache.set('my_key', cached_data)
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def register_user(request):
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        user = serializer.save()
-        # Log the user in after registration
-        login(request, user)
-        return Response(serializer.data, status=status.HTTP_302_FOUND)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class LoginApiUserView(ObtainAuthToken):
-    authentication_classes = [TokenAuthentication]
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            user = serializer.validated_data['user']
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key, 'user_id': user.id})
-        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ProfileApiDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
-
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
-
-    def get(self, request, *args, **kwargs):
-        user = self.request.user
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
+# def register_user(request):
+#     serializer = UserSerializer(data=request.data)
+#     if serializer.is_valid():
+#         user = serializer.save()
+#         # Log the user in after registration
+#         login(request, user)
+#         return Response(serializer.data, status=status.HTTP_302_FOUND)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+#
+# class LoginApiUserView(ObtainAuthToken):
+#     authentication_classes = [TokenAuthentication]
+#
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.serializer_class(data=request.data, context={'request': request})
+#         if serializer.is_valid():
+#             user = serializer.validated_data['user']
+#             token, _ = Token.objects.get_or_create(user=user)
+#             return Response({'token': token.key, 'user_id': user.id})
+#         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+#
+#
+# class ProfileApiDetailsView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def retrieve(self, request, *args, **kwargs):
+#         instance = self.get_object()
+#         serializer = self.get_serializer(instance)
+#         return Response(serializer.data)
+#
+#     def get(self, request, *args, **kwargs):
+#         user = self.request.user
+#         serializer = UserSerializer(user)
+#         return Response(serializer.data)
 
 
 # class OnlyAnonymousMixin:
