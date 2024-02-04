@@ -75,10 +75,27 @@ class ProfileApiDetailsView(generics.RetrieveUpdateDestroyAPIView):
         return Response(serializer.data)
 
 
-class RegisterUserView(views.CreateView):
+# class OnlyAnonymousMixin:
+#     def dispatch(self, request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             return HttpResponseRedirect(self.getsuccess_url)
+#         return super().dispatch(self.request, *args, **kwargs)
+#
+#     def get_success_url(self):
+#         return self.success_url or reverse('login_user')
+
+class OnlyAnonymousMixin(AccessMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('home_page')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class RegisterUserView(OnlyAnonymousMixin, views.CreateView):
     model = UserModel
     template_name = 'home/signup.html'
     form_class = RegisterUserForm
+    success_url = reverse_lazy('login_user')
     class_name = 'signup'
 
     def form_valid(self, form):
@@ -103,10 +120,12 @@ class RegisterUserView(views.CreateView):
         return reverse_lazy('profile-details', kwargs={'pk': self.object.pk})
 
 
-class LoginUserView(auth_views.LoginView):
+class LoginUserView(OnlyAnonymousMixin, auth_views.LoginView):
     form_class = LoginUserForm
     template_name = 'home/login.html'
+    success_url = reverse_lazy('profile-details')
     class_name = 'login'
+    redirect_authenticated_user = True
 
     def form_valid(self, form):
         result = form.cleaned_data.get('username')
@@ -151,7 +170,7 @@ class LogoutUserView(auth_mixins.LoginRequiredMixin, auth_views.LogoutView):
         return HttpResponseRedirect(self.get_next_page())
 
 
-class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
+class ProfileDetailsView(ErrorRedirectMixin, auth_mixins.LoginRequiredMixin, views.DetailView):
     template_name = 'users/profile-details.html'
     model = UserModel
     form_class = UserEditForm
