@@ -32,19 +32,19 @@ INSTALLED_APPS = [
     "school_bg.content",
     "school_bg.users.apps.UsersConfig",
     "school_bg.global_content",
-    'schema_viewer',
+    # 'schema_viewer',
 ]
 
-SCHEMA_VIEWER = {
-    'apps': [
-"django.contrib.auth",
-        "school_bg.content",
-        "school_bg.users",
-        "school_bg.global_content",
-        "django.contrib.admin",
-        "django.contrib.contenttypes",
-    ],
-}
+# SCHEMA_VIEWER = {
+#     'apps': [
+#         "django.contrib.auth",
+#         "school_bg.content",
+#         "school_bg.users",
+#         "school_bg.global_content",
+#         "django.contrib.admin",
+#         "django.contrib.contenttypes",
+#     ],
+# }
 
 CHANNEL_LAYERS = {
     'default': {
