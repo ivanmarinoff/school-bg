@@ -74,21 +74,27 @@ if cached_data is None:
 #         serializer = UserSerializer(user)
 #         return Response(serializer.data)
 
+class OnlyAnonymousMixin:
 
-# class OnlyAnonymousMixin:
+    def get_success_url(self):
+        return redirect('home_page')
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        return super().get(request, *args, **kwargs)
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         return HttpResponseRedirect(self.get_success_url())
+    #     return super().dispatch(request, *args, **kwargs)
+
+
+# class OnlyAnonymousMixin(AccessMixin):
 #     def dispatch(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             return HttpResponseRedirect(self.getsuccess_url)
-#         return super().dispatch(self.request, *args, **kwargs)
-#
-#     def get_success_url(self):
-#         return self.success_url or reverse('login_user')
-
-class OnlyAnonymousMixin(AccessMixin):
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return redirect('home_page')
-        return super().dispatch(request, *args, **kwargs)
+#         if self.request.user.is_authenticated:
+#             return redirect('home_page')
+#         return super().dispatch(request, *args, **kwargs)
 
 
 class RegisterUserView(OnlyAnonymousMixin, views.CreateView):
