@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from school_bg.settings import LOGIN_URL
@@ -12,6 +13,16 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
     def handle_no_permission(self):
         return redirect(self.login_url)
+
+class OnlyAnonymousMixin:
+
+    def get_success_url(self):
+        return redirect('home_page')
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        return super().get(request, *args, **kwargs)
 
 
 class ErrorRedirectMixin(AccessMixin):

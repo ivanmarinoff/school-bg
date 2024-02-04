@@ -35,69 +35,47 @@ if cached_data is None:
     cache.set('my_key', cached_data)
 
 
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# def register_user(request):
-#     serializer = UserSerializer(data=request.data)
-#     if serializer.is_valid():
-#         user = serializer.save()
-#         # Log the user in after registration
-#         login(request, user)
-#         return Response(serializer.data, status=status.HTTP_302_FOUND)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# class LoginApiUserView(ObtainAuthToken):
-#     authentication_classes = [TokenAuthentication]
-#
-#     def post(self, request, *args, **kwargs):
-#         serializer = self.serializer_class(data=request.data, context={'request': request})
-#         if serializer.is_valid():
-#             user = serializer.validated_data['user']
-#             token, _ = Token.objects.get_or_create(user=user)
-#             return Response({'token': token.key, 'user_id': user.id})
-#         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# class ProfileApiDetailsView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes = [IsAuthenticated]
-#
-#     def retrieve(self, request, *args, **kwargs):
-#         instance = self.get_object()
-#         serializer = self.get_serializer(instance)
-#         return Response(serializer.data)
-#
-#     def get(self, request, *args, **kwargs):
-#         user = self.request.user
-#         serializer = UserSerializer(user)
-#         return Response(serializer.data)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_user(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        # Log the user in after registration
+        login(request, user)
+        return Response(serializer.data, status=status.HTTP_302_FOUND)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class OnlyAnonymousMixin:
 
-    def get_success_url(self):
-        return redirect('home_page')
+class LoginApiUserView(ObtainAuthToken):
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key, 'user_id': user.id})
+        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProfileApiDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
-        return super().get(request, *args, **kwargs)
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     if request.user.is_authenticated:
-    #         return HttpResponseRedirect(self.get_success_url())
-    #     return super().dispatch(request, *args, **kwargs)
+        user = self.request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 
-# class OnlyAnonymousMixin(AccessMixin):
-#     def dispatch(self, request, *args, **kwargs):
-#         if self.request.user.is_authenticated:
-#             return redirect('home_page')
-#         return super().dispatch(request, *args, **kwargs)
-
-
-class RegisterUserView(OnlyAnonymousMixin, views.CreateView):
+class RegisterUserView(views.CreateView):
     model = UserModel
     template_name = 'home/signup.html'
     form_class = RegisterUserForm
@@ -126,7 +104,7 @@ class RegisterUserView(OnlyAnonymousMixin, views.CreateView):
         return reverse_lazy('profile-details', kwargs={'pk': self.object.pk})
 
 
-class LoginUserView(OnlyAnonymousMixin, auth_views.LoginView):
+class LoginUserView(auth_views.LoginView):
     form_class = LoginUserForm
     template_name = 'home/login.html'
     success_url = reverse_lazy('profile-details')
@@ -176,7 +154,7 @@ class LogoutUserView(auth_mixins.LoginRequiredMixin, auth_views.LogoutView):
         return HttpResponseRedirect(self.get_next_page())
 
 
-class ProfileDetailsView(ErrorRedirectMixin, auth_mixins.LoginRequiredMixin, views.DetailView):
+class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     template_name = 'users/profile-details.html'
     model = UserModel
     form_class = UserEditForm
