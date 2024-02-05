@@ -19,10 +19,10 @@ urlpatterns = [
     # path('schema/', include('schema_viewer.urls')),
 ]
 
-if not settings.DEBUG:
-    handler400 = 'school_bg.exception.bad_request'
-    handler403 = 'school_bg.exception.permission_denied'
-    handler500 = 'school_bg.exception.server_error'
+# if not settings.DEBUG:
+#     handler400 = 'school_bg.exception.bad_request'
+#     handler403 = 'school_bg.exception.permission_denied'
+#     handler500 = 'school_bg.exception.server_error'
 
 if settings.DEBUG:
     from django.conf.urls.static import static
