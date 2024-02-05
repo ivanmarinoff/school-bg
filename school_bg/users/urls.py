@@ -8,9 +8,9 @@ from school_bg.users.views import RegisterUserView, LoginUserView, LogoutUserVie
 UserModel = get_user_model()
 
 urlpatterns = [
-    re_path(r'^register_user/$', views.register_user, name='register-user'),
-    re_path(r'^login_user/$', views.LoginApiUserView.as_view(), name='login-user'),
-    re_path(r'^profile_user/$', views.ProfileApiDetailsView.as_view(), name='profile-details'),
+    # re_path(r'^register_user/$', views.register_user, name='register-user'),
+    # re_path(r'^login_user/$', views.LoginApiUserView.as_view(), name='login-user'),
+    # re_path(r'^profile_user/$', views.ProfileApiDetailsView.as_view(), name='profile-details'),
     path('register/', RegisterUserView.as_view(success_url=reverse_lazy('register_user')), name='register_user'),
     path('login/', LoginUserView.as_view(), name='login_user'),
     path('logout/', LogoutUserView.as_view(), name='logout_user'),
