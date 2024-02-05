@@ -8,8 +8,10 @@ body{
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	font-family: 'DoubleShadow', DoubleShadow, Arial, sans-serif;
-	background: linear-gradient(to bottom, #0f0c29, #304352, #304352);
+	/*font-family: 'DoubleShadow', DoubleShadow, Arial, sans-serif;*/
+	font-family: "Alegreya Sans", Alegreya Sans, Arial, sans-serif;
+	/*background: linear-gradient(to bottom, #0f0c29, #304352, #304352);*/
+	background: linear-gradient(180deg, #1E312A 0%, #BC9C22 100%);
 }
 .main{
 	width: 350px;
