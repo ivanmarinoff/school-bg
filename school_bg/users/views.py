@@ -170,7 +170,7 @@ class LogoutUserView(auth_mixins.LoginRequiredMixin, auth_views.LogoutView):
         return HttpResponseRedirect(self.get_next_page())
 
 
-class ProfileDetailsView(ErrorRedirectMixin, auth_mixins.LoginRequiredMixin, views.DetailView):
+class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     template_name = 'users/profile-details.html'
     model = UserModel
     form_class = UserEditForm
