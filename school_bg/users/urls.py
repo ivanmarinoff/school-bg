@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.urls import path, include, reverse_lazy, re_path
-
 from school_bg.users import views
 from school_bg.users.views import RegisterUserView, LoginUserView, LogoutUserView, ProfileEditView, ProfileDeleteView, \
     ProfileDetailsView, PasswordChangeView, PasswordChangeDoneView
