@@ -330,7 +330,9 @@ class LoginUserView(auth_views.LoginView):
         return super().form_valid(form)
 
     def get_success_url(self, *args, **kwargs):
-        return reverse_lazy('profile-details', kwargs={'pk': self.request.user.pk})
+        if self.request.user.is_authenticated:
+            return reverse_lazy('profile-details', kwargs={'pk': self.request.user.pk})
+        return reverse_lazy('home_page')
 
 
 class ProfileDetailsView(LoginRequiredMixin, views.DetailView):
