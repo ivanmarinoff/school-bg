@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import HttpResponseRedirect
+
 from school_bg.core.email_utils import send_email_with_template
 
 from django.contrib.auth import logout
@@ -16,8 +18,9 @@ UserModel = get_user_model()
 def handle_user_logout(sender, request, user, **kwargs):
     # Check if the logout was triggered after a password change
     if request.session.get('password_changed', False):
-        logout(request)  # Log out the user
+        # logout(request)  # Log out the user
         del request.session['password_changed']  # Remove the session variable
+
 
 
 def send_successful_registration_email(user):

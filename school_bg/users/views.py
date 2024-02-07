@@ -1,4 +1,4 @@
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, logout
 from django.contrib.auth.mixins import AccessMixin
 from django.http import HttpResponseRedirect
 from django.core.cache import cache
@@ -193,6 +193,15 @@ class ProfileEditView(ErrorRedirectMixin, auth_mixins.LoginRequiredMixin, views.
 class PasswordChangeView(auth_mixins.LoginRequiredMixin, auth_views.PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'users/profile_password_change.html'
+
+    def form_valid(self, form):
+        form.save()
+        self.request.session['password_changed'] = True  # Set the session variable
+        logout(self.request)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('password_change_done')
 
 
 class PasswordChangeDoneView(ErrorRedirectMixin, auth_views.PasswordChangeDoneView):
